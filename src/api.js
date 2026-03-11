@@ -4,7 +4,7 @@ const ENV_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const BASE_URL = ENV_BASE_URL || (
   import.meta.env.DEV
     ? "http://localhost:4000"
-    : "https://d233wpvxi3tdmh.cloudfront.net"
+    : "https://ccbackend-production-0f68.up.railway.app"
 );
 
 export async function getTenantConfig(host = window.location.hostname || "localhost") {
