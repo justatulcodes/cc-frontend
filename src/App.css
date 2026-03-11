@@ -1,0 +1,298 @@
+@import "tailwindcss";
+
+:root {
+  /* ==========================================================================
+     1. RAW HEX COLOR PALETTE (Primitives)
+     ========================================================================== */
+  --hex-white: #ffffff;
+  --hex-black: #000000;
+  --hex-gray-50: #f9fafb;
+  --hex-gray-100: #f3f4f6;
+  --hex-gray-200: #F5e7eb;
+  --hex-gray-300: #d1d5db;
+  --hex-gray-400: #9ca3af;
+  --hex-gray-700: #374151;
+  --hex-gray-800: #111827;
+  --hex-gray-900: #0f172a;
+  
+  --hex-green-50: #f0fdf4;
+  --hex-green-200: #bbf7d0;
+  --hex-green-300: #86efac;
+  --hex-green-400: #4ade80;
+  --hex-green-600: #16a34a;
+  --hex-green-700: #15803d;
+  --hex-green-800: #166534;
+  --hex-green-900: #022c22;
+  --hex-green-pure: #008000;
+  --hex-green-950: #016630;
+  
+  --hex-emerald-500: #10b981;
+  --hex-emerald-50: #ecfdf5;
+  
+  --hex-mint-bg: #EBF5F1;   
+  --hex-mint-pill: #DCF1E7; 
+  
+  --hex-blue-500: #3b82f6;
+  --hex-blue-600: #2563eb;
+  --hex-blue-700: #1d4ed8;
+  --hex-blue-800: #1e40af;
+  --hex-blue-900: #1e3a8a;
+  
+  --hex-amber-500: #f59e42;
+  --hex-red-500: #ef4444;
+  --hex-slate-200: #e2e8f0;
+  --hex-slate-900: #0f172a;
+  
+  --hex-login-blur-1: #05df72;
+  --hex-login-blur-2: #9ae600;
+  --hex-login-input: #f7f7f7;
+  --hex-login-footer: #6a7282;
+
+  /* ==========================================================================
+     2. SEMANTIC VARIABLES (Base Theme Logic)
+     ========================================================================== */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--hex-dark-bg);
+
+  --primary-bg: var(--hex-white);
+  --secondary-bg: var(--hex-gray-50);
+  --primary-border: var(--hex-gray-200);
+  --secondary-border: var(--hex-gray-300);
+  --primary-text: var(--hex-gray-800);
+  --secondary-text: var(--hex-gray-400);
+  --tertiary-text: var(--hex-gray-400);
+  --accent-green: #005CE8;
+  --accent-green-bg: var(--hex-green-200);
+  --accent-blue: var(--hex-blue-600);
+  --danger: var(--hex-red-500);
+
+  /* ==========================================================================
+     3. COMPONENT COLOR USAGES (Logic Tokens)
+     ========================================================================== */
+    
+    /* Stat/AnalyticsBar */
+    --stat-bg: var(--primary-bg);
+    --stat-border: var(--primary-border);
+    --stat-label-text: var(--secondary-text);
+    --stat-value-text: var(--primary-text);
+    --stat-icon-bg: var(--accent-green-bg);
+
+    /* Sidebar */
+    --sidebar-bg: var(--primary-bg);
+    --sidebar-border: var(--primary-border);
+    --sidebar-logo-text: var(--accent-green);
+    --sidebar-logo-subtext: var(--tertiary-text);
+    --sidebar-tab-bg: var(--primary-bg);
+    --sidebar-tab-hover-bg: #F0F6FF;
+    --sidebar-tab-active-bg: rgba(236, 253, 245, 0.5);
+    --sidebar-tab-text: var(--hex-gray-800);
+    --sidebar-tab-active-text: var(--accent-green);
+    --sidebar-tab-icon: currentColor;
+    --sidebar-user-bg: var(--primary-bg);
+    --sidebar-user-avatar-bg: var(--accent-green-bg);
+    --sidebar-user-avatar-text: var(--accent-green);
+    --sidebar-user-name: var(--hex-gray-800);
+    --sidebar-user-role: var(--secondary-text);
+
+    /* Filters */
+    --filter-bg: var(--primary-bg);
+    --filter-border: rgba(255,255,255,0.1);
+    --filter-input-bg: rgba(255,255,255,0.05);
+    --filter-input-border: rgba(255,255,255,0.1);
+    --filter-input-text: var(--hex-white);
+    --filter-text: var(--hex-gray-800);
+
+    /* ConversationThread / Messages */
+    --message-user-bg: var(--hex-mint-bg);
+    --message-assistant-bg: rgba(220, 252, 231, 0.5);
+    --message-border: var(--primary-border);
+    --message-text-user: var(--hex-black);
+    --message-text-assistant: var(--accent-green);
+    --message-source-bg: var(--hex-gray-100);
+    --message-source-text: var(--hex-gray-700);
+
+    /* ConversationList */
+    --conv-bg: var(--primary-bg);
+    --conv-active-bg: var(--hex-emerald-50);
+    --conv-active-border: var(--accent-green);
+    --conv-inactive-bg: var(--secondary-bg);
+    --conv-text-main: var(--hex-gray-800);
+    --conv-text-secondary: var(--secondary-text);
+    --conv-text-preview: var(--hex-gray-700);
+    --conv-source-bg: var(--secondary-bg);
+    --conv-source-border: var(--primary-border);
+    --conv-source-text: var(--hex-gray-700);
+    --conv-source-link: var(--accent-green);
+    --conv-source-link-hover: var(--hex-green-600);
+    --conv-border: var(--primary-border);
+    --conv-msg-user-bg: var(--hex-mint-bg);
+    --conv-msg-assistant-bg: rgba(220, 252, 231, 0.5);
+    --conv-text-green: var(--accent-green);
+
+    /* ProductAnalytics */
+    --product-card-bg: var(--primary-bg);
+    --product-card-border: var(--primary-border);
+    --product-card-text: var(--primary-text);
+    --product-link-text: var(--accent-blue);
+    --product-badge-bg: var(--accent-green-bg);
+    --product-badge-text: var(--accent-green);
+    --pa-bg: var(--primary-bg);
+    --pa-border: var(--primary-border);
+    --pa-text-main: var(--primary-text);
+    --pa-text-link: var(--accent-blue);
+    --pa-text-link-hover: var(--hex-blue-700);
+    --pa-badge-bg: var(--accent-green-bg);
+    --pa-badge-text: var(--hex-green-700);
+    --pa-text-secondary: var(--tertiary-text);
+
+    /* RepeatedQuestions */
+    --rq-card-bg: var(--primary-bg);
+    --rq-card-border: var(--primary-border);
+    --rq-card-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    --rq-table-bg: var(--hex-gray-100);
+    --rq-table-header-bg: var(--secondary-bg);
+    --rq-table-text: var(--hex-gray-800);
+    --rq-table-text-secondary: var(--tertiary-text);
+    --rq-badge-count-bg: var(--hex-green-200);
+    --rq-badge-count-text: var(--hex-green-900);
+    --rq-badge-category-bg: var(--hex-green-300);
+    --rq-badge-category-text: var(--hex-green-900);
+    --rq-skeleton-bg: var(--primary-border);
+
+    /* Analytics Dashboard */
+    --bg-primary: var(--primary-bg);
+    --bg-secondary: var(--secondary-bg);
+    --bg-gray-50: var(--hex-gray-50);
+    --bg-gray-200: var(--hex-gray-200);
+    --bg-gray-300: var(--hex-gray-300);
+    --bg-green-50: var(--hex-green-50);
+    --bg-green-100: var(--hex-green-200);
+    --bg-green-lighter: var(--hex-green-300);
+    --bg-green-lightest: var(--hex-green-400);
+    --bg-green-ultra-light: #fafdfc;
+    --text-primary: var(--primary-text);
+    --text-secondary: var(--secondary-text);
+    --text-tertiary: var(--tertiary-text);
+    --text-gray-500: var(--tertiary-text);
+    --text-gray-600: var(--secondary-text);
+    --text-gray-700: var(--hex-gray-700);
+    --text-gray-800: var(--hex-gray-800);
+    --text-gray-900: var(--primary-text);
+    --text-black: var(--hex-black);
+    --text-green: var(--hex-green-900);
+    --text-red: var(--danger);
+    --text-blue: var(--accent-blue);
+    --border-gray-200: var(--primary-border);
+    --border-gray-300: var(--secondary-border);
+    --chart-green: var(--accent-green);
+    --chart-blue: var(--accent-blue);
+    --chart-emerald: var(--hex-emerald-500);
+    --chart-amber: var(--hex-amber-500);
+    --chart-grid: #f0f0f0;
+    --btn-green-600: var(--accent-green);
+    --btn-green-700: var(--hex-green-600);
+    --btn-green-hover: var(--hex-green-600);
+    --spinner-bg: var(--primary-border);
+    --spinner-fg: #005CE8;
+
+    /* Leads Page */
+    --leads-page-bg: var(--secondary-bg);
+    --leads-bg-white: var(--primary-bg);
+    --leads-border-gray-200: var(--primary-border);
+    --leads-text-black: var(--hex-black);
+    --leads-text-gray-900: var(--primary-text);
+    --leads-border-slate-200: var(--hex-slate-200);
+    --leads-bg-gray-50: var(--hex-gray-50);
+    --leads-text-slate-900: var(--hex-slate-900);
+    --leads-text-gray-400: var(--hex-gray-400);
+    --leads-focus-ring-emerald-500: var(--hex-emerald-500);
+    --leads-text-gray-500: var(--tertiary-text);
+    --leads-text-gray-600: var(--secondary-text);
+    --leads-hover-bg-gray-50: var(--hex-gray-50);
+    --leads-bg-emerald-50: var(--hex-emerald-50);
+    --leads-text-emerald-600: var(--hex-green-800);
+    --leads-divide-gray-100: var(--hex-gray-100);
+    --leads-text-red-500: var(--hex-red-500);
+    --leads-border-emerald-600: var(--hex-green-800);
+
+    /* LiveDashboard */
+    --location-bg: var(--hex-mint-bg);
+    --location-text: #212529;
+    --location-textindia: rgba(33, 37, 41, 0.1);
+    --id-text: var(--hex-green-900);
+    --id-bg: rgba(220, 241, 231, 0.5);
+
+    /* LoginPage */
+    --login-blur-primary: var(--hex-login-blur-1);
+    --login-blur-secondary: var(--hex-login-blur-2);
+    --login-accent: var(--hex-green-200);
+    --login-heading: #212529;
+    --login-placeholder: #717182;
+    --login-input-bg: var(--hex-login-input);
+    --login-input-bg-alt: #f3f3f5;
+    --login-feature-icon-bg: rgba(220, 241, 231, 0.2);
+    --login-checkbox-bg: var(--hex-login-input);
+    --login-checkbox-border: rgba(0,0,0,0.1);
+    --login-footer-text: var(--hex-login-footer);
+    --login-gradient-start: var(--hex-green-900);
+    --login-gradient-mid: var(--hex-green-950);
+    --login-gradient-end: var(--hex-green-900);
+
+    /* App Container */
+    --bg-main-gray: var(--secondary-bg);
+    --main-bg-color: var(--secondary-bg);
+    --header-bg: var(--secondary-bg);
+    --content-bg: var(--primary-bg);
+    --brand-success: var(--hex-emerald-500);
+    --brand-success-light: var(--hex-green-200);
+    --code-green: var(--hex-green-900);
+    --code-bg: rgba(220, 241, 231, 0.5);
+    --neutral-border: var(--secondary-border);
+    --tag-text: var(--hex-gray-700);
+}
+
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em var(--glow-indigo-500));
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em var(--glow-react));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: var(--hex-gray-500);
+}

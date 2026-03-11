@@ -1,0 +1,365 @@
+@import "tailwindcss";
+
+:root {
+  /* UNUSED HEX COLOURS THAT ARE NOT USED IN THIS CURRENT FILE*/
+
+
+  /* ==========================================================================
+     0. JSX SHARED COLOR TOKENS (One variable per hex)
+     ========================================================================== */
+  --color-primary-500: #005ce8;
+  --color-primary-600: #004ab8;
+  --color-primary-cta: #5c5cff;
+  --color-primary-cta-soft: #b8b8ff;
+  --color-primary-active: #0e5fd9;
+  --color-primary-100: #f0f6ff;
+  --color-blue-500: #3b82f6;
+  --color-surface-0: #ffffff;
+  --color-surface-50: #f9fafb;
+  --color-surface-100: #f5f6f7;
+  --color-neutral-700: #626c70;
+  --color-border-200: #e5e7eb;
+  --color-mint-100: #dcf1e7;
+  --color-text-900: #191b1c;
+  --color-black: #000000;
+
+  /* ==========================================================================
+     1. BASE PALETTE (Raw Hex Codes)
+     ========================================================================== */
+  
+  /* Neutral / Grays */
+  --hex-white: #ffffff;
+  --hex-black: #000000;
+  --hex-gray-50: #f9fafb;
+  --hex-gray-100: #f3f4f6;
+  --hex-gray-200: #f5e7eb;
+  --hex-gray-300: #d1d5db;
+  --hex-gray-400: #9ca3af;
+  --hex-gray-500: #888888;
+  --hex-gray-600: #666666;
+  --hex-gray-700: #374151;
+  --hex-gray-800: #111827;
+  --hex-gray-900: #0f172a;
+  --hex-slate-900: #0f172a;
+  --hex-slate-200: #e2e8f0;
+  --hex-dark-bg: #242424; /* Root page bg (body) */
+
+  /* Greens / Emerald / Mints */
+  --hex-green-50: #f0fdf4;
+  --hex-green-100: #dcfce7;
+  --hex-green-200: #bbf7d0;
+  --hex-green-300: #86efac;
+  --hex-green-400: #4ade80;
+  --hex-green-600: #16a34a;
+  --hex-green-700: #15803d;
+  --hex-green-800: #166534;
+  --hex-green-900: #022c22;
+  --hex-green-950: #016630; /* LoginPage hero gradient mid */
+  --hex-green-pure: #008000; /* LoginPage hero gradient start/end, Logout button text */
+  --hex-green-100-50: #dcfce780; /* ConversationThread assistant avatar bg */
+  --hex-emerald-500: #10b981;
+  --hex-mint-bg: #ebf5f1;
+  --hex-mint-pill: #dcf1e7; /* Logout button bg, AnalyticsDashboard CTAs */
+  --color-mint-glass: #DCF1E780; /* AnalyticsDashboard executive summary card */
+  --hex-green-ultra-light: #fafdfc;
+
+  /* Blues / Accents */
+  --hex-blue-500: #3b82f6;
+  --hex-blue-600: #2563eb;
+  --hex-blue-700: #1d4ed8;
+  --hex-blue-800: #1e40af;
+  --hex-blue-900: #1e3a8a;
+  --hex-indigo-500: #646cff; /* Link default color */
+  --hex-indigo-600: #535bf2; /* Link hover color */
+  --hex-violet-600: #7c3aed;
+  --hex-cyan-500: #06b6d4;
+  --hex-purple-500: #a855f7;
+  --hex-teal-500: #14b8a6;
+  --hex-amber-500b: #f59e0b; /* Charts fallback amber (utils palette) */
+  --glow-indigo-500: #646cffaa; /* App logo hover glow */
+  --glow-react: #61dafbaa; /* React logo hover glow */
+
+  /* Status / Alerts */
+  --hex-amber-500: #f59e42; /* AnalyticsDashboard bar/legend amber */
+  --hex-red-500: #ef4444; /* Alerts/danger text */
+
+  /* Brand / Login Special */
+  --hex-login-blur-primary: #05df72;
+  --hex-login-blur-secondary: #9ae600;
+  --hex-login-heading: #212529; /* LoginPage headings */
+  --hex-login-placeholder: #717182; /* LoginPage inputs */
+  --hex-login-footer: #6a7282; /* LoginPage footer text */
+  --glass-mint-20: rgba(220, 241, 231, 0.2); /* LoginPage feature icon bg */
+  --glass-green-20: rgba(34, 197, 94, 0.2); /* Logout button border */
+  --glass-red-10: rgba(239, 68, 68, 0.1); /* LoginPage error bg */
+
+
+  /* ==========================================================================
+     2. FUNCTIONAL VARIABLES (Semantic & Component Tokens)
+     ========================================================================== */
+
+  /* Global Settings */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--hex-dark-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Unified Semantic Layer */
+  --primary-bg: var(--hex-white); /* Layout shells: Sidebar, AnalyticsDashboard cards, LiveDashboard panels, Leads page */
+  --secondary-bg: var(--hex-gray-50); /* Background for tables/secondary panels, LiveDashboard wrapper */
+  --primary-border: var(--hex-gray-200); /* Sidebar + dashboard card borders, LiveDashboard separators */
+  --secondary-border: var(--hex-gray-300); /* Skeletons, filters, light dividers */
+  --primary-text: var(--hex-gray-800); /* Headings in dashboards, Sidebar name */
+  --secondary-text: var(--hex-gray-400); /* Subtitles, helper text */
+  --tertiary-text: var(--hex-gray-400); /* Muted labels */
+  --accent-green: #005CE8;
+  --accent-green-bg: var(--hex-green-200); /* Sidebar avatar bg, Login hero supporting text, AnalyticsBar pill bg */
+  --danger: var(--hex-red-500); /* Login error text/border */
+
+  /* Sidebar */
+  --sidebar-bg: var(--primary-bg); /* Sidebar container */
+  --sidebar-border: var(--primary-border); /* Sidebar right divider */
+  --sidebar-logo-text: var(--accent-green); /* Sidebar brand text */
+  --sidebar-logo-subtext: var(--tertiary-text); /* Sidebar brand subtext */
+  --sidebar-tab-bg: var(--primary-bg); /* Tab idle bg */
+  --sidebar-tab-hover-bg: #F0F6FF; /* Tab hover bg */
+  --sidebar-tab-active-bg: rgba(14, 95, 217, 0.1);
+  --sidebar-tab-text: var(--hex-gray-800); /* Tab label */
+  --sidebar-tab-active-text: #0E5FD9; /* Active tab label */
+  --sidebar-tab-icon: currentColor;
+  --sidebar-user-bg: var(--primary-bg); /* Footer card */
+  --sidebar-user-avatar-bg: var(--accent-green-bg); /* User avatar circle */
+  --sidebar-user-avatar-text: var(--accent-green); /* Initials in avatar */
+  --sidebar-user-name: var(--hex-gray-800); /* User name text */
+  --sidebar-user-role: var(--secondary-text); /* User role text */
+
+  /* Conversations & Messages */
+  --conv-bg: var(--primary-bg); /* Conversation list background */
+  --conv-active-bg: var(--hex-green-50); /* Active conversation highlight */
+  --conv-active-border: var(--accent-green); /* Active conversation border */
+  --conv-inactive-bg: var(--secondary-bg); /* Inactive rows */
+  --conv-text-main: var(--hex-gray-800); /* Conversation titles */
+  --message-user-bg: var(--hex-gray-100); /* Chat user bubbles */
+  --message-assistant-bg: rgba(220, 252, 231, 0.5); /* Chat assistant bubbles */
+  --message-text-user: var(--hex-black); /* Chat user text */
+  --message-text-assistant: var(--accent-green); /* Chat assistant text */
+  --login-feature-icon-bg: var(--glass-mint-20); /* LoginPage feature icon circles */
+  --login-error-bg: var(--glass-red-10); /* LoginPage error alert */
+  --accent-green-border-soft: var(--glass-green-20); /* Logout button border, soft outlines */
+
+  /* Product Analytics */
+  --pa-bg: var(--primary-bg); /* AnalyticsDashboard cards */
+  --pa-text-main: var(--primary-text); /* AnalyticsDashboard headings */
+  --pa-badge-bg: var(--accent-green-bg); /* Analytics badges */
+  --pa-badge-text: var(--hex-green-700); /* Badge text */
+  --accent-blue: var(--hex-blue-600); /* Links/buttons needing blue emphasis */
+  --accent-blue-hover: var(--hex-blue-700); /* Hover state for blue emphasis */
+
+  /* Leads Page */
+  --leads-page-bg: var(--secondary-bg); /* Leads page outer shell */
+  --leads-bg-white: var(--primary-bg); /* Leads cards */
+  --leads-border-slate-200: var(--hex-slate-200); /* Leads dividers */
+  --leads-text-slate-900: var(--hex-slate-900); /* Leads headings */
+  --leads-bg-emerald-50: var(--hex-green-50); /* Leads highlights */
+  --leads-text-emerald-600: var(--hex-green-800); /* Leads accent text */
+
+  /* Dashboard & Analytics */
+  --bg-primary: var(--primary-bg); /* Analytics dashboard surface */
+  --bg-secondary: var(--secondary-bg); /* Secondary panels */
+  --text-green: var(--hex-green-900); /* Positive text accents */
+  --chart-green: var(--accent-green); /* AnalyticsDashboard line chart (messages) */
+  --chart-blue: var(--hex-blue-600); /* AnalyticsDashboard bar (sessions) */
+  --chart-emerald: var(--hex-emerald-500); /* AnalyticsDashboard geo/conversations bars */
+  --chart-amber: var(--hex-amber-500); /* AnalyticsDashboard max repeat bars */
+
+  /* Login Page */
+  --login-blur-primary: var(--hex-login-blur-primary); /* LoginPage hero blob 1 */
+  --login-blur-secondary: var(--hex-login-blur-secondary); /* LoginPage hero blob 2 */
+  --login-heading: var(--hex-login-heading); /* LoginPage main headings */
+  --login-input-bg: var(--hex-gray-50); /* LoginPage inputs */
+  --login-footer-text: var(--hex-login-footer); /* LoginPage footer */
+  --login-gradient-start: var(--hex-green-900); /* LoginPage sidebar gradient start/end */
+  --login-gradient-mid: var(--hex-green-950); /* LoginPage sidebar gradient mid */
+  --login-gradient-end: var(--hex-green-900);
+}
+
+a {
+  font-weight: 500;
+  color: var(--hex-indigo-500);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--hex-indigo-600);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: var(--hex-indigo-500);
+}
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ==========================
+   Stat Card
+   ========================== */
+.stat-card {
+  background: var(--stat-bg);
+  border: 1px solid var(--stat-border);
+  border-radius: 14px;
+}
+.stat-card-label {
+  color: var(--stat-label-text);
+}
+.stat-card-value {
+  color: var(--stat-value-text);
+}
+.stat-card-icon {
+  background: var(--stat-icon-bg);
+}
+
+/* ==========================
+   Filters
+   ========================== */
+.filter-input {
+  background: var(--filter-input-bg);
+  border: 1px solid var(--filter-input-border);
+  color: var(--filter-text);
+}
+
+/* ==========================
+   ConversationThread
+   ========================== */
+.message-user {
+  background: var(--message-user-bg);
+  color: var(--message-text-user);
+}
+.message-assistant {
+  background: var(--message-assistant-bg);
+  color: var(--message-text-assistant);
+}
+.message-box {
+  border: 1px solid var(--message-border);
+}
+
+/* ==========================
+   ProductAnalytics
+   ========================== */
+.product-card {
+  background: var(--product-card-bg);
+  border: 1px solid var(--product-card-border);
+  color: var(--product-card-text);
+}
+.product-link {
+  color: var(--product-link-text);
+}
+.product-badge {
+  background: var(--product-badge-bg);
+  color: var(--product-badge-text);
+}
+
+/* ==========================
+   RepeatedQuestions
+   ========================== */
+.rq-card {
+  background: var(--rq-card-bg);
+  border: 1px solid var(--rq-card-border);
+  box-shadow: var(--rq-card-shadow);
+}
+.rq-table {
+  background: var(--rq-table-bg);
+}
+.rq-table-header {
+  background: var(--rq-table-header-bg);
+  color: var(--rq-table-text);
+}
+.rq-table-text {
+  color: var(--rq-table-text);
+}
+.rq-table-text-secondary {
+  color: var(--rq-table-text-secondary);
+}
+.rq-badge-count {
+  background: var(--rq-badge-count-bg);
+  color: var(--rq-badge-count-text);
+}
+.rq-badge-category {
+  background: var(--rq-badge-category-bg);
+  color: var(--rq-badge-category-text);
+}
+.rq-skeleton {
+  background: var(--rq-skeleton-bg);
+}
+
+/* ==========================
+   Sidebar Tabs Styling
+   ========================== */
+.sidebar-tab {
+  background-color: var(--sidebar-tab-bg);
+  color: var(--sidebar-tab-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.sidebar-tab:hover {
+  background-color: var(--sidebar-tab-hover-bg);
+}
+.sidebar-tab.active {
+  background-color: var(--sidebar-tab-active-bg);
+  color: var(--sidebar-tab-active-text);
+}
+
+/* ==========================
+   Sidebar Logo & User
+   ========================== */
+.sidebar-logo-text {
+  color: var(--sidebar-logo-text);
+}
+.sidebar-logo-subtext {
+  color: var(--sidebar-logo-subtext);
+}
+.sidebar-user-avatar {
+  background-color: var(--sidebar-user-avatar-bg);
+  color: var(--sidebar-user-avatar-text);
+}
+.sidebar-user-name {
+  color: var(--sidebar-user-name);
+}
+.sidebar-user-role {
+  color: var(--sidebar-user-role);
+}
+
+.session-row,
+.session-row:hover,
+.session-row:focus,
+.session-row:focus-visible {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}

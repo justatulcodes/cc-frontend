@@ -1,0 +1,668 @@
+{
+  "A_executive_summary": [
+    "Dataset size: 54 sessions and 87 user messages.",
+    "Top demand category by message volume: 'other' (58 msgs, 66.7%).",
+    "Conversion signal: 0/6 product_discovery sessions later reach buy_intent/where_to_buy (0.0%).",
+    "Friction signal: 4 'stuck sessions' found (top 10 listed by repeat count).",
+    "Quality signal: 15 sessions are in the dataset’s bottom-quartile min_score (top 25 listed)."
+  ],
+  "B_insights_and_recommendations": [
+    "Prioritize content and quick-replies for the top categories by volume: other (58), product_discovery (13), lawn (8).",
+    "Turn the most repeated questions into: (1) homepage FAQ tiles, (2) chatbot 'suggested questions', and (3) single-scan answer cards. Top repeats include: 'can you show me the different lawn mix you have'(12), 'i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. what single change will help the most?'(4), 'i’m new to gardening — what’s the best fertiliser for vegetables in perth?'(3).",
+    "Add a guided flow inside product_discovery that explicitly offers: 'Compare options' → 'Recommended product' → 'Where to buy' CTA, because only 0 of 6 PD sessions show a later intent/WTB signal.",
+    "Investigate the top 'stuck sessions' and patch gaps where the bot likely failed to resolve the question (same normalized text repeated). Highest repeat count observed in top 10: 4.",
+    "Reduce loops in category 'other' (highest repeated-question instances: 20) by: adding disambiguation questions, showing 2–3 options, and confirming the user’s context (plant type, area, problem symptoms).",
+    "Review low-score sessions (bottom-quartile min_score) to find failure modes (missing rules, ambiguous categories, weak normalization). Lowest min_score in sample: 0.352.",
+    "Use hourly volume to schedule support coverage and time-sensitive nudges (e.g., 'Where to buy' prompts during peak hours).",
+    "Note: dataset is small, so treat percentages as directional; focus on repeated questions and stuck sessions first (they’re robust even on small samples)."
+  ],
+  "C_chart_plan": [
+    {
+      "chart": "kpi_cards",
+      "title": "Topline KPIs",
+      "x": null,
+      "y": null,
+      "series": null,
+      "notes": "Show total sessions, total user messages, and conversion move rate (PD→Intent/WTB)."
+    },
+    {
+      "chart": "bar",
+      "title": "Messages by Category",
+      "x": "category",
+      "y": "message_count",
+      "series": null,
+      "notes": "Include % labels. Sort descending."
+    },
+    {
+      "chart": "bar",
+      "title": "Sessions by Category (any hit)",
+      "x": "category",
+      "y": "session_count",
+      "series": null,
+      "notes": "A session is counted if it contains at least one message in the category."
+    },
+    {
+      "chart": "table",
+      "title": "Top 10 Repeated Normalized Questions (Overall)",
+      "x": "normalized",
+      "y": "count",
+      "series": null,
+      "notes": "Use normalized text and counts."
+    },
+    {
+      "chart": "small_multiples_bar",
+      "title": "Top 10 Repeated Normalized Questions (Per Category)",
+      "x": "normalized",
+      "y": "count",
+      "series": "category",
+      "notes": "Create one bar chart per category; limit to top 10 each."
+    },
+    {
+      "chart": "bar",
+      "title": "Top 'Stuck Sessions' by Max Repeat Count",
+      "x": "session_id",
+      "y": "max_repeat_count",
+      "series": null,
+      "notes": "A stuck session has the same normalized text repeated >=2 times within the session."
+    },
+    {
+      "chart": "line",
+      "title": "Hourly Message Volume (Overall)",
+      "x": "hour_bucket_utc",
+      "y": "messages",
+      "series": null,
+      "notes": "Only if hour_bucket_utc is parseable; otherwise omit."
+    },
+    {
+      "chart": "line",
+      "title": "Hourly Message Volume (By Category)",
+      "x": "hour_bucket_utc",
+      "y": "messages",
+      "series": "category",
+      "notes": "Multi-series line (or stacked area) for top categories; group long tail into 'Other' if needed."
+    }
+  ],
+  "D_data_table": {
+    "kpis": {
+      "total_sessions": 54,
+      "total_user_messages": 87,
+      "messages_by_category": {
+        "other": 58,
+        "product_discovery": 13,
+        "lawn": 8,
+        "soil_mix": 3,
+        "buy_intent": 2,
+        "problem_symptom": 2,
+        "where_to_buy": 1
+      },
+      "messages_by_category_pct": {
+        "other": 66.6667,
+        "product_discovery": 14.9425,
+        "lawn": 9.1954,
+        "soil_mix": 3.4483,
+        "buy_intent": 2.2989,
+        "problem_symptom": 2.2989,
+        "where_to_buy": 1.1494
+      },
+      "sessions_by_category": {
+        "other": 40,
+        "lawn": 8,
+        "product_discovery": 6,
+        "soil_mix": 3,
+        "buy_intent": 2,
+        "problem_symptom": 2,
+        "where_to_buy": 1
+      },
+      "sessions_by_category_pct": {
+        "other": 74.0741,
+        "lawn": 14.8148,
+        "product_discovery": 11.1111,
+        "soil_mix": 5.5556,
+        "buy_intent": 3.7037,
+        "problem_symptom": 3.7037,
+        "where_to_buy": 1.8519
+      },
+      "top10_normalized_overall": [
+        [
+          "can you show me the different lawn mix you have",
+          12
+        ],
+        [
+          "i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. what single change will help the most?",
+          4
+        ],
+        [
+          "i’m new to gardening — what’s the best fertiliser for vegetables in perth?",
+          3
+        ],
+        [
+          "i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. user: what single change will help the most?",
+          3
+        ],
+        [
+          "what kind of products do richgro sell?",
+          3
+        ],
+        [
+          "waht products do you sell, list them all please",
+          3
+        ],
+        [
+          "i did not recieve my order",
+          2
+        ],
+        [
+          "hi - i am puzzled as to why my canna lilies are absolutely covered in rust despite having treated them 3 times throughout the summer with your product - it has been applied in accordance with the instructions. i am at the point of having to remove these once gorgeous plants.",
+          2
+        ],
+        [
+          "i want the best products for tomatoes, roses, lawn, indoor plants, composting, pests, weeds and soil. give me everything.",
+          2
+        ],
+        [
+          "i need to find/purchase a product",
+          2
+        ]
+      ],
+      "top10_normalized_per_category": {
+        "buy_intent": [
+          [
+            "i need to find/purchase a product",
+            2
+          ]
+        ],
+        "lawn": [
+          [
+            "i want the best products for tomatoes, roses, lawn, indoor plants, composting, pests, weeds and soil. give me everything.",
+            2
+          ],
+          [
+            "i am growing roses in my lawn",
+            1
+          ],
+          [
+            "my lawn has weeds popping up everywhere — what can i use?",
+            1
+          ],
+          [
+            "suggest weedkillers for lawn",
+            1
+          ],
+          [
+            "i hate your lawn products. they do not work",
+            1
+          ],
+          [
+            "lawn",
+            1
+          ],
+          [
+            "good morning can you tell me what is the difference between lawn mix and landscape lawn mix in bulka bags and what is the coverage ? iam in wa thanks robyn",
+            1
+          ]
+        ],
+        "other": [
+          [
+            "i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. what single change will help the most?",
+            4
+          ],
+          [
+            "i’m new to gardening — what’s the best fertiliser for vegetables in perth?",
+            3
+          ],
+          [
+            "i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. user: what single change will help the most?",
+            3
+          ],
+          [
+            "what kind of products do richgro sell?",
+            3
+          ],
+          [
+            "waht products do you sell, list them all please",
+            3
+          ],
+          [
+            "i did not recieve my order",
+            2
+          ],
+          [
+            "hi - i am puzzled as to why my canna lilies are absolutely covered in rust despite having treated them 3 times throughout the summer with your product - it has been applied in accordance with the instructions. i am at the point of having to remove these once gorgeous plants.",
+            2
+          ],
+          [
+            "what kind of products does richgro sell",
+            1
+          ],
+          [
+            "can you recommend an organic fertiliser for roses?",
+            1
+          ],
+          [
+            "is there something safe for pets to control pests in my garden?",
+            1
+          ]
+        ],
+        "problem_symptom": [
+          [
+            "as a black marvel customer i contacted you recently by phone about the presence of fungus gnats in new bags of both your compost and potting mix. some of these inevitably ended up in indoor plant pots. i was advised to remove the top layer of soil and then treat the surface with ground cinnamon which the gnats do not like. i would like your further advice about white fungus now growing on the surface of the cinnamon treated soil on one of my daughter’s favourite indoor plants. it is a very delicate alocesia and since the treatment has lost two leaves. our question relates to the fungus on the cinnamon being harmful to the plant? and what further action you would recommend to save it?",
+            1
+          ],
+          [
+            "can you guide me to some pest killer for my mango farm",
+            1
+          ]
+        ],
+        "product_discovery": [
+          [
+            "can you show me the different lawn mix you have",
+            12
+          ],
+          [
+            "show me the first 2 products details",
+            1
+          ]
+        ],
+        "soil_mix": [
+          [
+            "what richgro products are good for improving sandy soil?",
+            1
+          ],
+          [
+            "i poured your liquid fertiliser straight on dry soil in 40°c heat and now everything is burnt.",
+            1
+          ],
+          [
+            "suggest me soil wetters & water savers for perfh",
+            1
+          ]
+        ],
+        "where_to_buy": [
+          [
+            "where to buy",
+            1
+          ]
+        ]
+      },
+      "stuck_sessions_top10": [
+        {
+          "session_id": "7e00f39b-27ea-44d9-9913-e8f2faf7ee86",
+          "max_repeat_count": 4,
+          "top_repeated_normalized": [
+            "can you show me the different lawn mix you have"
+          ],
+          "unique_normalized_count": 1,
+          "message_count": 4
+        },
+        {
+          "session_id": "57f8be5b-e424-45f9-bf43-ae8a4f6e8b2e",
+          "max_repeat_count": 3,
+          "top_repeated_normalized": [
+            "can you show me the different lawn mix you have"
+          ],
+          "unique_normalized_count": 1,
+          "message_count": 3
+        },
+        {
+          "session_id": "07e079a9-2814-4ec6-917a-406c67db4e12",
+          "max_repeat_count": 2,
+          "top_repeated_normalized": [
+            "can you show me the different lawn mix you have"
+          ],
+          "unique_normalized_count": 1,
+          "message_count": 2
+        },
+        {
+          "session_id": "32801c7d-e132-4e3c-bd4c-12272403cba5",
+          "max_repeat_count": 2,
+          "top_repeated_normalized": [
+            "waht products do you sell, list them all please"
+          ],
+          "unique_normalized_count": 2,
+          "message_count": 3
+        }
+      ],
+      "hourly_message_volume_overall": [
+        {
+          "hour_bucket_utc": "2026-01-14 04:00:00+00:00",
+          "messages": 3
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 05:00:00+00:00",
+          "messages": 12
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 06:00:00+00:00",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 11:00:00+00:00",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 13:00:00+00:00",
+          "messages": 27
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 06:00:00+00:00",
+          "messages": 7
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 07:00:00+00:00",
+          "messages": 5
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 08:00:00+00:00",
+          "messages": 6
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 09:00:00+00:00",
+          "messages": 13
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 10:00:00+00:00",
+          "messages": 11
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 11:00:00+00:00",
+          "messages": 1
+        }
+      ],
+      "hourly_message_volume_by_category": [
+        {
+          "hour_bucket_utc": "2026-01-14 04:00:00+00:00",
+          "category": "other",
+          "messages": 2
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 04:00:00+00:00",
+          "category": "lawn",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 05:00:00+00:00",
+          "category": "other",
+          "messages": 10
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 05:00:00+00:00",
+          "category": "lawn",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 05:00:00+00:00",
+          "category": "soil_mix",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 06:00:00+00:00",
+          "category": "lawn",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 11:00:00+00:00",
+          "category": "other",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 13:00:00+00:00",
+          "category": "other",
+          "messages": 21
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 13:00:00+00:00",
+          "category": "lawn",
+          "messages": 3
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 13:00:00+00:00",
+          "category": "problem_symptom",
+          "messages": 2
+        },
+        {
+          "hour_bucket_utc": "2026-01-14 13:00:00+00:00",
+          "category": "soil_mix",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 06:00:00+00:00",
+          "category": "other",
+          "messages": 5
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 06:00:00+00:00",
+          "category": "lawn",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 06:00:00+00:00",
+          "category": "where_to_buy",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 07:00:00+00:00",
+          "category": "other",
+          "messages": 4
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 07:00:00+00:00",
+          "category": "buy_intent",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 08:00:00+00:00",
+          "category": "other",
+          "messages": 6
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 09:00:00+00:00",
+          "category": "other",
+          "messages": 9
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 09:00:00+00:00",
+          "category": "product_discovery",
+          "messages": 2
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 09:00:00+00:00",
+          "category": "lawn",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 09:00:00+00:00",
+          "category": "soil_mix",
+          "messages": 1
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 10:00:00+00:00",
+          "category": "product_discovery",
+          "messages": 11
+        },
+        {
+          "hour_bucket_utc": "2026-01-15 11:00:00+00:00",
+          "category": "buy_intent",
+          "messages": 1
+        }
+      ]
+    },
+    "conversion_signals": {
+      "sessions_with_product_discovery": 6,
+      "sessions_with_buy_intent_or_where_to_buy": 3,
+      "sessions_moved_pd_to_intent_or_wtb": 0,
+      "move_rate_pct": 0.0
+    },
+    "friction": {
+      "low_score_sessions_definition": "Bottom quartile (Q1) of min_score within this JSON dataset",
+      "low_score_sessions_top25": [
+        {
+          "session_id": "29e6b5d8-b428-45a9-a974-da3caa43279d",
+          "min_score": 0.3515625,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "764b8319-defe-4253-89bb-aa8b4f61e2df",
+          "min_score": 0.388671875,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "905886cc-cf5c-4525-b645-6d736c81ea1e",
+          "min_score": 0.4140625,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "8bd7dd3a-d0bf-4e2c-8ec0-ab3ef9ea65f8",
+          "min_score": 0.45703125,
+          "source": "Playground",
+          "country": "Australia"
+        },
+        {
+          "session_id": "750fa99f-7199-4e0a-a52b-9f3355a9f30d",
+          "min_score": 0.4765625,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "f4d56b2a-822c-490d-aaf8-4113408678f8",
+          "min_score": 0.482421875,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "6d3bebe9-8edc-4ac7-b258-963ac159f28b",
+          "min_score": 0.498046875,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "f9b7a34d-2a0c-4850-9a1d-2c8f72fa9601",
+          "min_score": 0.50390625,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "b5e92aac-92e8-4f08-8c1f-df71a429678a",
+          "min_score": 0.50390625,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "79d7fe2b-06a9-4e1b-9f26-39ac8fe455fc",
+          "min_score": 0.5234375,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "0828be04-55fd-4c6b-bd70-5ae44334d6f2",
+          "min_score": 0.5234375,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "9b4c56fb-1b67-4411-9898-38e4f4fb5751",
+          "min_score": 0.5234375,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "7e00f39b-27ea-44d9-9913-e8f2faf7ee86",
+          "min_score": 0.5234375,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "07e079a9-2814-4ec6-917a-406c67db4e12",
+          "min_score": 0.5234375,
+          "source": "Playground",
+          "country": "India"
+        },
+        {
+          "session_id": "57f8be5b-e424-45f9-bf43-ae8a4f6e8b2e",
+          "min_score": 0.5234375,
+          "source": "Playground",
+          "country": "India"
+        }
+      ],
+      "repeats_by_category": {
+        "buy_intent": {
+          "repeated_question_count": 1,
+          "repeat_instances_total": 2,
+          "top5_repeats": [
+            [
+              "i need to find/purchase a product",
+              2
+            ]
+          ]
+        },
+        "lawn": {
+          "repeated_question_count": 1,
+          "repeat_instances_total": 2,
+          "top5_repeats": [
+            [
+              "i want the best products for tomatoes, roses, lawn, indoor plants, composting, pests, weeds and soil. give me everything.",
+              2
+            ]
+          ]
+        },
+        "other": {
+          "repeated_question_count": 7,
+          "repeat_instances_total": 20,
+          "top5_repeats": [
+            [
+              "i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. what single change will help the most?",
+              4
+            ],
+            [
+              "i’m new to gardening — what’s the best fertiliser for vegetables in perth?",
+              3
+            ],
+            [
+              "i’m growing chillies on my apartment balcony in perth, they get 2 hours of sun, wind hits hard, and i forget to water. user: what single change will help the most?",
+              3
+            ],
+            [
+              "what kind of products do richgro sell?",
+              3
+            ],
+            [
+              "waht products do you sell, list them all please",
+              3
+            ]
+          ]
+        },
+        "problem_symptom": {
+          "repeated_question_count": 0,
+          "repeat_instances_total": 0,
+          "top5_repeats": []
+        },
+        "product_discovery": {
+          "repeated_question_count": 1,
+          "repeat_instances_total": 12,
+          "top5_repeats": [
+            [
+              "can you show me the different lawn mix you have",
+              12
+            ]
+          ]
+        },
+        "soil_mix": {
+          "repeated_question_count": 0,
+          "repeat_instances_total": 0,
+          "top5_repeats": []
+        },
+        "where_to_buy": {
+          "repeated_question_count": 0,
+          "repeat_instances_total": 0,
+          "top5_repeats": []
+        }
+      }
+    }
+  },
+  "notes": [
+    "All metrics are computed only from fields present in the JSON.",
+    "If dataset is small, interpret percentages directionally; repeated questions and stuck sessions are still reliable signals."
+  ]
+}
