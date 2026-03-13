@@ -1,6 +1,19 @@
 import chatDingSound from '../assets/sound/chat-ding-2.mp3';
 
-const PROVIDER_GLOBAL_KEY = import.meta.env.VITE_PROVIDER_GLOBAL_KEY;
+const FALLBACK_PROVIDER_GLOBAL_KEY = "chatbase";
+
+function normalizeProviderGlobalKey(value) {
+  if (typeof value !== "string") return "";
+
+  const trimmed = value.trim();
+  if (!trimmed || trimmed === "undefined" || trimmed === "null") return "";
+
+  return trimmed;
+}
+
+const PROVIDER_GLOBAL_KEY =
+  normalizeProviderGlobalKey(import.meta.env.VITE_PROVIDER_GLOBAL_KEY) ||
+  FALLBACK_PROVIDER_GLOBAL_KEY;
 const SCRIPT_SRC = `https://www.${PROVIDER_GLOBAL_KEY}.co/embed.min.js`;
 
 const SELECTORS = (() => {
@@ -17,7 +30,7 @@ const SELECTORS = (() => {
 const SCRIPT_MARKER_ATTR = "data-chat-widget-script";
 const SCRIPT_MARKER_VALUE = "true";
 
-function getProvider() {
+export function getChatWidgetProvider() {
   return window[PROVIDER_GLOBAL_KEY];
 }
 
@@ -46,7 +59,7 @@ export function createChatWidget({
   let soundListenerAttached = false;
 
   function safeCall(method, ...args) {
-    const provider = getProvider();
+    const provider = getChatWidgetProvider();
     if (!provider) return;
     try {
       return provider(method, ...args);
@@ -57,7 +70,7 @@ export function createChatWidget({
 
   function initSoundNotification() {
     console.log('[ChatWidget] initSoundNotification called');
-    const provider = getProvider();
+    const provider = getChatWidgetProvider();
     console.log('[ChatWidget] Provider:', provider);
     console.log('[ChatWidget] Provider has addEventListener:', typeof provider?.addEventListener === 'function');
     
@@ -153,7 +166,7 @@ export function createChatWidget({
   }
 
   function ensureBootstrap() {
-    const provider = getProvider();
+    const provider = getChatWidgetProvider();
     if (typeof provider === "function") {
       const state = safeCall("getState");
       if (state === "initialized") return;

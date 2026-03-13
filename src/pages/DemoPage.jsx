@@ -1,21 +1,19 @@
-import { useEffect } from "react";
-import { createChatWidget } from "../services/chatWidget";
+import { useEffect, useState } from "react";
+import { createChatWidget, getChatWidgetProvider } from "../services/chatWidget";
+
+const TOOL_REGISTRATION_RETRY_MS = 250;
+const TOOL_REGISTRATION_MAX_ATTEMPTS = 20;
 
 export default function DemoPage() {
+  const [errorMessage, setErrorMessage] = useState("");
+
   useEffect(() => {
-    const chatWidget = createChatWidget({
-      scriptId: "BirzDros6zCpamNHOggQF",
-      defaultConfig: {
-        closeOnClickOutside: true,
-      },
-      removeInjectedDomOnDestroy: true,
-      playOnlyWhenMinimized: false,
-    });
+    let chatWidget = null;
+    let isDisposed = false;
+    let registerToolsTimerId = null;
+    let attemptsLeft = TOOL_REGISTRATION_MAX_ATTEMPTS;
 
-    chatWidget.init();
-
-    // Register Chatbase client-side custom action
-    window.chatbase?.("registerTools", {
+    const tools = {
       captured_lead_submission: async (args, user) => {
         try {
           const {
@@ -86,19 +84,64 @@ export default function DemoPage() {
           };
         }
       },
-    });
+    };
+
+    const registerTools = () => {
+      const provider = getChatWidgetProvider();
+      if (typeof provider !== "function") {
+        if (!isDisposed && attemptsLeft > 0) {
+          attemptsLeft -= 1;
+          registerToolsTimerId = window.setTimeout(registerTools, TOOL_REGISTRATION_RETRY_MS);
+        }
+        return;
+      }
+
+      try {
+        provider("registerTools", tools);
+      } catch (error) {
+        console.error("[DemoPage] Failed to register chat widget tools:", error);
+      }
+    };
+
+    try {
+      setErrorMessage("");
+      chatWidget = createChatWidget({
+        scriptId: "BirzDros6zCpamNHOggQF",
+        defaultConfig: {
+          closeOnClickOutside: true,
+        },
+        removeInjectedDomOnDestroy: true,
+        playOnlyWhenMinimized: false,
+      });
+
+      chatWidget.init();
+      registerTools();
+    } catch (error) {
+      console.error("[DemoPage] Failed to initialize chat widget:", error);
+      setErrorMessage("The chatbot demo is temporarily unavailable.");
+    }
 
     return () => {
-      chatWidget.destroy({ removeScript: true, removeDom: true, resetGlobal: true });
+      isDisposed = true;
+      if (registerToolsTimerId) {
+        window.clearTimeout(registerToolsTimerId);
+      }
+      chatWidget?.destroy({ removeScript: true, removeDom: true, resetGlobal: true });
     };
   }, []);
 
   return (
     <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: "var(--color-surface-100)" }}>
       <div className="text-center">
-        <p className="text-sm" style={{color: 'var(--secondary-text)'}}>
-          The chatbot widget will appear in the bottom right corner
-        </p>
+        {errorMessage ? (
+          <p className="text-sm" style={{ color: "var(--secondary-text)" }}>
+            {errorMessage}
+          </p>
+        ) : (
+          <p className="text-sm" style={{ color: "var(--secondary-text)" }}>
+            The chatbot widget will appear in the bottom right corner
+          </p>
+        )}
       </div>
     </div>
   );
