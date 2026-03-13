@@ -20,6 +20,80 @@ function Field({ label, value }) {
   );
 }
 
+function urlToTitle(url) {
+  if (!url) return "Unknown product";
+  try {
+    const parsed = new URL(url);
+    const slug = parsed.pathname.split("/").filter(Boolean).pop() || url;
+    return slug
+      .split("-")
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ");
+  } catch {
+    return url;
+  }
+}
+
+function truncateText(value, maxLength = 180) {
+  if (!value) return "—";
+  const normalized = String(value).replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+  return `${normalized.slice(0, maxLength - 1).trimEnd()}...`;
+}
+
+function ProductListCard({ title, subtitle, items, type }) {
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+      <div className="border-b border-gray-200 px-6 py-4">
+        <div className="text-lg font-semibold text-gray-900">{title}</div>
+        <div className="text-sm text-gray-500">{subtitle}</div>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="px-6 py-8 text-sm text-gray-500">No data available yet.</div>
+      ) : (
+        <div className="divide-y divide-gray-100">
+          {items.map((item, index) => {
+            const url = item.product_url || item.target_url || item.normalized_url;
+            const timestamp = type === "recommended" ? item.recommended_at : item.clicked_at;
+            return (
+              <div key={item.rec_id || item.redirect_id || `${url}-${index}`} className="flex items-center justify-between gap-4 px-6 py-4">
+                <div className="space-y-1 min-w-0">
+                  <div className="text-sm font-semibold text-gray-900 truncate">{urlToTitle(url)}</div>
+                  <div className="text-xs text-gray-500">
+                    {type === "recommended" ? "Recommended" : "Clicked"}: {timestamp ? toSydneyTime(timestamp) : "—"}
+                  </div>
+                  {url ? (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block truncate text-xs text-[var(--color-primary-500)] hover:underline"
+                    >
+                      {url}
+                    </a>
+                  ) : null}
+                </div>
+
+                {url ? (
+                  <button
+                    type="button"
+                    onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
+                    className="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--color-primary-500)] bg-[var(--color-primary-100)] whitespace-nowrap"
+                  >
+                    Open
+                  </button>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function LeadsDetailsPage({ lead, onBack, onViewChat }) {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -58,6 +132,8 @@ export default function LeadsDetailsPage({ lead, onBack, onViewChat }) {
 
   const leadRecord = details?.lead || lead;
   const conversations = useMemo(() => details?.conversations || [], [details]);
+  const recommendedProducts = useMemo(() => details?.recommended_products || [], [details]);
+  const clickedProducts = useMemo(() => details?.clicked_products || [], [details]);
 
   if (!lead) return null;
 
@@ -118,7 +194,7 @@ export default function LeadsDetailsPage({ lead, onBack, onViewChat }) {
                       {leadRecord?.service_interest || leadRecord?.lead_type || "Support enquiry"}
                     </div>
                   </div>
-                  <span className="inline-flex px-3 py-1.5 rounded-full text-sm font-semibold bg-emerald-50 text-emerald-700">
+                  <span className="inline-flex px-3 py-1.5 rounded-full text-sm font-semibold bg-[var(--color-primary-100)] text-[var(--color-primary-600)]">
                     {leadRecord?.status || "captured"}
                   </span>
                 </div>
@@ -214,7 +290,9 @@ export default function LeadsDetailsPage({ lead, onBack, onViewChat }) {
                           Started: {conversation.started_at ? toSydneyTime(conversation.started_at) : "—"}
                         </div>
                         <div className="text-xs text-gray-500">
-                          Last message: {conversation.last_message || "—"}
+                          <span title={conversation.last_message || ""}>
+                            Last message: {truncateText(conversation.last_message)}
+                          </span>
                         </div>
                       </div>
 
@@ -231,6 +309,21 @@ export default function LeadsDetailsPage({ lead, onBack, onViewChat }) {
                   ))}
                 </div>
               )}
+            </div>
+
+            <div className="grid gap-5 lg:grid-cols-2">
+              <ProductListCard
+                title="Recommended Products"
+                subtitle="Products suggested by the bot during this lead journey."
+                items={recommendedProducts}
+                type="recommended"
+              />
+              <ProductListCard
+                title="Clicked Products"
+                subtitle="Tracked product links the user opened."
+                items={clickedProducts}
+                type="clicked"
+              />
             </div>
           </>
         )}

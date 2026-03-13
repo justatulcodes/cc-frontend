@@ -7,7 +7,7 @@ const cssVar = (name, fallback) => {
 const DEFAULT_PALETTE = [
   cssVar('--hex-violet-600', '#7C3AED'), // violet
   cssVar('--hex-cyan-500', '#06B6D4'), // cyan
-  cssVar('--hex-green-600', '#22C55E'), // green
+  cssVar('--hex-blue-700', '#1D4ED8'), // blue
   cssVar('--hex-amber-500b', '#F59E0B'), // amber
   cssVar('--hex-red-500', '#EF4444'), // red
   cssVar('--hex-blue-500', '#3B82F6'), // blue

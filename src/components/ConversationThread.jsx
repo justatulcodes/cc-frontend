@@ -34,14 +34,14 @@ function SourceLinks({ sources }) {
               target="_blank"
               rel="noreferrer"
               style={{
-                color: "var(--accent-green)",
+                color: "var(--accent-blue)",
                 textDecoration: "underline",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--color-green-600)")
+                (e.currentTarget.style.color = "var(--accent-blue-hover)")
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--accent-green)")
+                (e.currentTarget.style.color = "var(--accent-blue)")
               }
             >
               {url}
@@ -160,7 +160,7 @@ export default function ConversationThread({ convo }) {
               style={{ borderColor: "var(--primary-border)" }}
             >
               <div className="flex items-center gap-2">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                   <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                 </svg>
@@ -188,12 +188,11 @@ export default function ConversationThread({ convo }) {
                   type="text"
                   value={modal.question}
                   onChange={(e) => setModal((m) => ({ ...m, question: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg text-sm border focus:outline-none focus:ring-2"
+                  className="w-full px-3 py-2 rounded-lg text-sm border focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)] focus:border-[var(--accent-blue)]"
                   style={{
                     backgroundColor: "var(--secondary-bg)",
                     borderColor: "var(--primary-border)",
                     color: "var(--primary-text)",
-                    focusRingColor: "var(--accent-green)",
                   }}
                   placeholder="Enter the question..."
                 />
@@ -207,7 +206,7 @@ export default function ConversationThread({ convo }) {
                 <textarea
                   value={modal.answer}
                   onChange={(e) => setModal((m) => ({ ...m, answer: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg text-sm border focus:outline-none focus:ring-2 resize-none"
+                  className="w-full px-3 py-2 rounded-lg text-sm border focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)] focus:border-[var(--accent-blue)] resize-none"
                   style={{
                     backgroundColor: "var(--secondary-bg)",
                     borderColor: "var(--primary-border)",
@@ -220,7 +219,14 @@ export default function ConversationThread({ convo }) {
 
               {/* Status messages */}
               {submitStatus === "success" && (
-                <div className="text-xs px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <div
+                  className="text-xs px-3 py-2 rounded-lg border"
+                  style={{
+                    backgroundColor: "var(--color-primary-100)",
+                    color: "var(--color-primary-600)",
+                    borderColor: "rgba(0, 92, 232, 0.18)",
+                  }}
+                >
                   ✓ Feedback saved successfully.
                 </div>
               )}
@@ -247,7 +253,7 @@ export default function ConversationThread({ convo }) {
                 onClick={handleSubmit}
                 disabled={submitting || submitStatus === "success" || !modal.question.trim() || !modal.answer.trim()}
                 className="px-4 py-2 rounded-lg text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ backgroundColor: "var(--accent-green)", color: "#fff" }}
+                style={{ backgroundColor: "var(--accent-blue)", color: "#fff" }}
               >
                 {submitting ? "Saving…" : submitStatus === "success" ? "Saved ✓" : "Save Feedback"}
               </button>
@@ -312,7 +318,7 @@ export default function ConversationThread({ convo }) {
                         height: "24px",
                         backgroundColor: isUser
                           ? "var(--hex-gray-50)"
-                          : "var(--hex-green-100-50)",
+                          : "rgba(240, 246, 255, 0.9)",
                       }}
                     >
                       <img
@@ -327,7 +333,7 @@ export default function ConversationThread({ convo }) {
                       style={{
                         color: isUser
                           ? "var(--primary-text)"
-                          : "var(--accent-green)",
+                          : "var(--accent-blue)",
                       }}
                     >
                       {isUser ? "User" : "Assistant"}
@@ -349,7 +355,7 @@ export default function ConversationThread({ convo }) {
                       <span
                         onClick={() => openModal(idx)}
                         className="inline-flex items-center gap-1 text-[12px] space-x-2 pe-4 font-medium cursor-pointer select-none transition-opacity hover:opacity-60"
-                        style={{ color: "var(--accent-green)" }}
+                        style={{ color: "var(--accent-blue)" }}
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>

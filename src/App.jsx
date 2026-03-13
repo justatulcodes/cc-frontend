@@ -288,7 +288,7 @@ export default function App() {
                         type="date"
                         value={dateFilter.from}
                         onChange={(e) => handleFromDateChange(e.target.value)}
-                        className="pl-4 pr-10 py-2 text-[15px] border border-gray-300 rounded-lg text-gray-800 bg-white w-44 focus:ring-2 focus:ring-green-500 outline-none"
+                        className="pl-4 pr-10 py-2 text-[15px] border border-gray-300 rounded-lg text-gray-800 bg-white w-44 focus:ring-2 focus:ring-[var(--color-primary-500)] outline-none"
                         max={dateFilter.to || todayISO}
                       />
                       <button type="button" onClick={() => handleIconClick(fromDateRef)} className="absolute right-3 text-gray-400 hover:text-[var(--color-primary-500)]"><CalendarIconSVG /></button>
@@ -302,7 +302,7 @@ export default function App() {
                         type="date"
                         value={dateFilter.to}
                         onChange={(e) => handleToDateChange(e.target.value)}
-                        className="pl-4 pr-10 py-2 text-[15px] border border-gray-300 rounded-lg text-gray-800 bg-white w-44 focus:ring-2 focus:ring-green-500 outline-none"
+                        className="pl-4 pr-10 py-2 text-[15px] border border-gray-300 rounded-lg text-gray-800 bg-white w-44 focus:ring-2 focus:ring-[var(--color-primary-500)] outline-none"
                         min={dateFilter.from || undefined}
                         max={todayISO}
                       />

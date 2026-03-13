@@ -132,8 +132,8 @@ export default function RepeatedQuestions({ questions, loading = false, isAIEnha
                       <span
                         className="inline-flex items-center justify-center px-4 py-1 rounded-full text-sm font-medium min-w-12"
                         style={{
-                          backgroundColor: "var(--color-green-200)",
-                          color: "var(--color-green-900)"
+                          backgroundColor: "var(--color-primary-100)",
+                          color: "var(--color-primary-600)"
                         }}
                       >
                         {formatInt(item.count)}
@@ -143,8 +143,8 @@ export default function RepeatedQuestions({ questions, loading = false, isAIEnha
                       <span
                         className="inline-flex items-center justify-center px-4 py-1 rounded-full text-sm font-medium whitespace-nowrap capitalize"
                         style={{
-                          backgroundColor: "var(--color-green-300)",
-                          color: "var(--color-green-900)"
+                          backgroundColor: "rgba(0, 92, 232, 0.12)",
+                          color: "var(--hex-blue-700)"
                         }}
                       >
                         {item.category.replace('_', ' ')}

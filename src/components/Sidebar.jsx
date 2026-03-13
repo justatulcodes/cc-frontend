@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/Carpet_Call_logo.png";
 // Inline SVG Icons
 const LiveConvoIcon = ({ color }) => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,12 +68,12 @@ export default function Sidebar({ currentTab, onTabChange, user }) {
     >
       {/* Logo Section */}
       <div
-        className="h-20 flex items-center px-5 py-5"
+        className="h-16 flex items-center px-5 py-5"
         style={{ borderBottom: "1px solid var(--primary-border)" }}
       >
         <img
-          src="/richgrologo2.svg"
-          alt="Richgro"
+          src={logo}
+          alt="Carpet Call Logo"
           onClick={() => {
             const idx = window.history.state?.idx ?? 0;
             if (idx === 0) {
@@ -82,7 +83,7 @@ export default function Sidebar({ currentTab, onTabChange, user }) {
               navigate(-idx);
             }
           }}
-          style={{ height: "auto", width: "auto", cursor: "pointer", outline: "none" }}
+          style={{ cursor: "pointer", outline: "none", height: "30px", width: "auto" }}
         />
       </div>
 

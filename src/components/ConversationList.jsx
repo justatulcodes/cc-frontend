@@ -10,7 +10,7 @@ export default function ConversationList({ items, selectedId, onSelect }) {
         const containerStyle = active
           ? {
               backgroundColor: "var(--conv-active-bg)",
-              border: '1px solid var(--accent-green)',
+              border: '1px solid var(--accent-blue)',
             }
           : {
               backgroundColor: "var(--secondary-bg)",

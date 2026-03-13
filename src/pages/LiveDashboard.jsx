@@ -200,7 +200,7 @@ export default function LiveDashboard() {
     return (
       <div className="h-full flex items-center justify-center" style={{ backgroundColor: "var(--secondary-bg)" }}>
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-4 animate-spin" style={{ borderColor: 'var(--primary-border)', borderTopColor: 'var(--accent-green)', borderRadius: '50%' }} />
+          <div className="w-10 h-10 border-4 animate-spin" style={{ borderColor: 'var(--primary-border)', borderTopColor: 'var(--accent-blue)', borderRadius: '50%' }} />
           <div className="text-sm" style={{ color: 'var(--secondary-text)' }}>Loading conversations...</div>
         </div>
       </div>
@@ -444,7 +444,7 @@ export default function LiveDashboard() {
               {loadingMessages ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="flex flex-col items-center gap-3">
-                    <div className="w-8 h-8 border-4 animate-spin rounded-full" style={{ borderColor: 'var(--primary-border)', borderTopColor: 'var(--accent-green)' }} />
+                    <div className="w-8 h-8 border-4 animate-spin rounded-full" style={{ borderColor: 'var(--primary-border)', borderTopColor: 'var(--accent-blue)' }} />
                     <div className="text-sm text-gray-500">Loading messages...</div>
                   </div>
                 </div>

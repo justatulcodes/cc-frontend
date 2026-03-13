@@ -4,7 +4,7 @@ export default function LeadsPasswordModal({ onClose, onSuccess }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const LEADS_PASSWORD = "richgro123";
+  const LEADS_PASSWORD = "cc123";
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -629,7 +629,7 @@ export default function AnalyticsDashboard() {
     </div>
 
     {/* Metrics row */}
-    <div className="grid grid-cols-4 relative">
+    <div className="grid grid-cols-2 relative">
       
       {/* Sessions with product_discovery */}
       <div className="flex flex-col items-center py-8 px-6 gap-2 relative">
@@ -659,7 +659,7 @@ export default function AnalyticsDashboard() {
       </div>
 
       {/* Sessions moved PD → intent/WTB */}
-      <div className="flex flex-col items-center py-8 px-6 gap-2 relative">
+      {/* <div className="flex flex-col items-center py-8 px-6 gap-2 relative">
         <img src="/sessions.svg" alt="" className="w-8 h-8 text-blue-600" />
         <div className="text-4xl font-bold text-gray-900 mt-1">
           {formatInt(conversion.sessions_moved_pd_to_intent_or_wtb)}
@@ -669,10 +669,10 @@ export default function AnalyticsDashboard() {
         </div>
         <div className="absolute right-0 top-0 bottom-0 w-[1px]" 
              style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(229, 231, 235, 1) 25%, rgba(229, 231, 235, 1) 75%, transparent 100%)' }} />
-      </div>
+      </div> */}
 
       {/* Move rate */}
-      <div className="flex flex-col items-center py-8 px-6 gap-2">
+      {/* <div className="flex flex-col items-center py-8 px-6 gap-2">
         <img src="/moverate.svg" alt="" className="w-8 h-8 text-blue-600" />
         <div className="text-4xl font-bold text-gray-900 mt-1">
           {formatPct(moveRate, { digits: 1 })}
@@ -680,7 +680,7 @@ export default function AnalyticsDashboard() {
         <div className="text-sm text-gray-500 text-center">
           Move rate
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
 </Section>
@@ -773,7 +773,7 @@ export default function AnalyticsDashboard() {
           <Card
             title="Recommendations (Action Steps)"
             subtitle={aiRecommendations ? "✨ AI-enhanced recommendations" : loadingAIRecommendations ? "⏳ Generating AI recommendations..." : undefined}
-            background="bg-[var(--color-mint-bg)]"
+            background="bg-[var(--color-primary-100)]"
           >
             {loadingAIRecommendations ? (
               <RecommendationSkeleton count={5} />
@@ -785,9 +785,9 @@ export default function AnalyticsDashboard() {
                   <div
                     key={i}
                     className="rounded-2xl border border-gray-200 py-3 px-3 flex gap-3 items-start"
-                    style={{ backgroundColor: "var(--bg-green-ultra-light)" }}
+                    style={{ backgroundColor: "var(--color-surface-0)" }}
                   >
-                    <span className="text-[15px] font-normal" style={{ color: "var(--color-green-960)" }}>{i + 1}.</span>
+                    <span className="text-[15px] font-normal" style={{ color: "var(--color-primary-600)" }}>{i + 1}.</span>
                     <span className="text-[15px] text-gray-900 font-normal flex-1">{x}</span>
                   </div>
                 ))}
@@ -831,7 +831,7 @@ export default function AnalyticsDashboard() {
                       {item.chatId}
                     </a>
                   </div>
-                  <div className="px-3 py-1 rounded-lg bg-green-100 text-green-700 text-sm font-semibold">
+                  <div className="px-3 py-1 rounded-lg bg-[var(--color-primary-100)] text-[var(--color-primary-600)] text-sm font-semibold">
                     {item.count}x
                   </div>
                 </div>

@@ -78,7 +78,7 @@ function Stat({ label, value, iconSrc, loading, isBlue }) {
         <div className="flex-shrink-0">
           <div
             className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: "var(--accent-green-bg)" }}
+            style={{ backgroundColor: "var(--color-primary-100)" }}
           >
             <img src={iconSrc} alt="" className="w-[16px] h-[16px]" />
           </div>

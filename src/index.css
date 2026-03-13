@@ -19,7 +19,7 @@
   --color-surface-100: #f5f6f7;
   --color-neutral-700: #626c70;
   --color-border-200: #e5e7eb;
-  --color-mint-100: #dcf1e7;
+  --color-mint-100: #dbeafe;
   --color-text-900: #191b1c;
   --color-black: #000000;
 
@@ -56,12 +56,12 @@
   --hex-green-900: #022c22;
   --hex-green-950: #016630; /* LoginPage hero gradient mid */
   --hex-green-pure: #008000; /* LoginPage hero gradient start/end, Logout button text */
-  --hex-green-100-50: #dcfce780; /* ConversationThread assistant avatar bg */
+  --hex-green-100-50: #dbeafe80; /* ConversationThread assistant avatar bg */
   --hex-emerald-500: #10b981;
-  --hex-mint-bg: #ebf5f1;
-  --hex-mint-pill: #dcf1e7; /* Logout button bg, AnalyticsDashboard CTAs */
-  --color-mint-glass: #DCF1E780; /* AnalyticsDashboard executive summary card */
-  --hex-green-ultra-light: #fafdfc;
+  --hex-mint-bg: #eff6ff;
+  --hex-mint-pill: #dbeafe; /* Logout button bg, AnalyticsDashboard CTAs */
+  --color-mint-glass: #dbeafe80; /* AnalyticsDashboard executive summary card */
+  --hex-green-ultra-light: #f8fbff;
 
   /* Blues / Accents */
   --hex-blue-500: #3b82f6;
@@ -84,13 +84,13 @@
   --hex-red-500: #ef4444; /* Alerts/danger text */
 
   /* Brand / Login Special */
-  --hex-login-blur-primary: #05df72;
-  --hex-login-blur-secondary: #9ae600;
+  --hex-login-blur-primary: #60a5fa;
+  --hex-login-blur-secondary: #38bdf8;
   --hex-login-heading: #212529; /* LoginPage headings */
   --hex-login-placeholder: #717182; /* LoginPage inputs */
   --hex-login-footer: #6a7282; /* LoginPage footer text */
-  --glass-mint-20: rgba(220, 241, 231, 0.2); /* LoginPage feature icon bg */
-  --glass-green-20: rgba(34, 197, 94, 0.2); /* Logout button border */
+  --glass-mint-20: rgba(59, 130, 246, 0.12); /* LoginPage feature icon bg */
+  --glass-green-20: rgba(37, 99, 235, 0.18); /* Logout button border */
   --glass-red-10: rgba(239, 68, 68, 0.1); /* LoginPage error bg */
 
 
@@ -119,7 +119,7 @@
   --secondary-text: var(--hex-gray-400); /* Subtitles, helper text */
   --tertiary-text: var(--hex-gray-400); /* Muted labels */
   --accent-green: #005CE8;
-  --accent-green-bg: var(--hex-green-200); /* Sidebar avatar bg, Login hero supporting text, AnalyticsBar pill bg */
+  --accent-green-bg: var(--color-primary-100); /* Sidebar avatar bg, Login hero supporting text, AnalyticsBar pill bg */
   --danger: var(--hex-red-500); /* Login error text/border */
 
   /* Sidebar */
@@ -141,12 +141,12 @@
 
   /* Conversations & Messages */
   --conv-bg: var(--primary-bg); /* Conversation list background */
-  --conv-active-bg: var(--hex-green-50); /* Active conversation highlight */
+  --conv-active-bg: var(--color-primary-100); /* Active conversation highlight */
   --conv-active-border: var(--accent-green); /* Active conversation border */
   --conv-inactive-bg: var(--secondary-bg); /* Inactive rows */
   --conv-text-main: var(--hex-gray-800); /* Conversation titles */
   --message-user-bg: var(--hex-gray-100); /* Chat user bubbles */
-  --message-assistant-bg: rgba(220, 252, 231, 0.5); /* Chat assistant bubbles */
+  --message-assistant-bg: rgba(240, 246, 255, 0.9); /* Chat assistant bubbles */
   --message-text-user: var(--hex-black); /* Chat user text */
   --message-text-assistant: var(--accent-green); /* Chat assistant text */
   --login-feature-icon-bg: var(--glass-mint-20); /* LoginPage feature icon circles */
@@ -157,7 +157,7 @@
   --pa-bg: var(--primary-bg); /* AnalyticsDashboard cards */
   --pa-text-main: var(--primary-text); /* AnalyticsDashboard headings */
   --pa-badge-bg: var(--accent-green-bg); /* Analytics badges */
-  --pa-badge-text: var(--hex-green-700); /* Badge text */
+  --pa-badge-text: var(--hex-blue-700); /* Badge text */
   --accent-blue: var(--hex-blue-600); /* Links/buttons needing blue emphasis */
   --accent-blue-hover: var(--hex-blue-700); /* Hover state for blue emphasis */
 
@@ -166,16 +166,16 @@
   --leads-bg-white: var(--primary-bg); /* Leads cards */
   --leads-border-slate-200: var(--hex-slate-200); /* Leads dividers */
   --leads-text-slate-900: var(--hex-slate-900); /* Leads headings */
-  --leads-bg-emerald-50: var(--hex-green-50); /* Leads highlights */
-  --leads-text-emerald-600: var(--hex-green-800); /* Leads accent text */
+  --leads-bg-emerald-50: var(--color-primary-100); /* Leads highlights */
+  --leads-text-emerald-600: var(--hex-blue-700); /* Leads accent text */
 
   /* Dashboard & Analytics */
   --bg-primary: var(--primary-bg); /* Analytics dashboard surface */
   --bg-secondary: var(--secondary-bg); /* Secondary panels */
-  --text-green: var(--hex-green-900); /* Positive text accents */
+  --text-green: var(--hex-blue-900); /* Positive text accents */
   --chart-green: var(--accent-green); /* AnalyticsDashboard line chart (messages) */
   --chart-blue: var(--hex-blue-600); /* AnalyticsDashboard bar (sessions) */
-  --chart-emerald: var(--hex-emerald-500); /* AnalyticsDashboard geo/conversations bars */
+  --chart-emerald: var(--hex-blue-500); /* AnalyticsDashboard geo/conversations bars */
   --chart-amber: var(--hex-amber-500); /* AnalyticsDashboard max repeat bars */
 
   /* Login Page */
@@ -184,9 +184,9 @@
   --login-heading: var(--hex-login-heading); /* LoginPage main headings */
   --login-input-bg: var(--hex-gray-50); /* LoginPage inputs */
   --login-footer-text: var(--hex-login-footer); /* LoginPage footer */
-  --login-gradient-start: var(--hex-green-900); /* LoginPage sidebar gradient start/end */
-  --login-gradient-mid: var(--hex-green-950); /* LoginPage sidebar gradient mid */
-  --login-gradient-end: var(--hex-green-900);
+  --login-gradient-start: var(--hex-blue-900); /* LoginPage sidebar gradient start/end */
+  --login-gradient-mid: var(--hex-blue-800); /* LoginPage sidebar gradient mid */
+  --login-gradient-end: var(--hex-blue-900);
 }
 
 a {

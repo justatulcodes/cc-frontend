@@ -138,7 +138,7 @@ export default function LeadsPage({
                       key={lead.id}
                       onClick={() => handleSelectLead(lead)}
                       className={`hover:bg-gray-50 cursor-pointer transition-colors ${
-                        selectedLead?.id === lead.id ? "bg-emerald-50" : ""
+                        selectedLead?.id === lead.id ? "bg-[var(--color-primary-100)]" : ""
                       }`}
                     >
                       <td className="px-5 py-4">
@@ -155,7 +155,7 @@ export default function LeadsPage({
                         {lead.service_interest || lead.lead_type || "Support enquiry"}
                       </td>
                       <td className="px-5 py-4">
-                        <span className="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">
+                        <span className="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-[var(--color-primary-100)] text-[var(--color-primary-600)]">
                           {lead.status || "captured"}
                         </span>
                       </td>
@@ -163,7 +163,7 @@ export default function LeadsPage({
                         {lead.created_at ? toSydneyTime(lead.created_at) : "—"}
                       </td>
                       <td className="px-5 py-4 text-left">
-                        <span className="py-1 rounded-md text-sm font-semibold text-emerald-600">
+                        <span className="py-1 rounded-md text-sm font-semibold text-[var(--color-primary-500)]">
                           View Details
                         </span>
                       </td>

@@ -48,10 +48,6 @@ export default function ProductAnalytics({
     }
 
     const visibleProducts = products.slice(0, MIN_ROWS);
-    const paddedProducts = [
-      ...visibleProducts,
-      ...Array.from({ length: Math.max(0, MIN_ROWS - visibleProducts.length) }, () => null),
-    ];
 
     
     return (
@@ -70,7 +66,7 @@ export default function ProductAnalytics({
               <span>Time</span>
             </div>
           )}
-          {paddedProducts.map((product, index) => {
+          {visibleProducts.map((product, index) => {
             const rowStyle = dividerOnly
               ? {
                   backgroundColor: "var(--color-surface-0)",
@@ -81,29 +77,6 @@ export default function ProductAnalytics({
                   backgroundColor: "var(--color-surface-0)",
                   border: `1px solid var(--primary-border)`,
                 };
-            if (!product) {
-              return (
-                <div
-                  key={`placeholder-api-${index}`}
-                  className="rounded-none h-[85px] px-4 py-3 flex items-center"
-                  style={rowStyle}
-                >
-                  <div className="flex items-start justify-between gap-4 w-full">
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-[15px] font-bold mb-2" style={{ color: "var(--secondary-text)" }}>
-                        No product data
-                      </h4>
-                      <div className="text-xs" style={{ color: "var(--tertiary-text)" }}>
-                        -
-                      </div>
-                    </div>
-                    <div className="text-xs font-medium whitespace-nowrap" style={{ color: "var(--color-neutral-700)" }}>
-                      0x
-                    </div>
-                  </div>
-                </div>
-              );
-            }
 
             const url = product.url || "";
             return (
@@ -212,7 +185,7 @@ export default function ProductAnalytics({
         const urls = [...textUrls, ...sourceUrls];
 
         urls
-          .filter((u) => u.includes("richgro.com.au/product/"))
+          .filter(Boolean)
           .map(normalizeUrl)
           .forEach((u) => {
             counts[u] = (counts[u] || 0) + 1;
@@ -226,12 +199,6 @@ export default function ProductAnalytics({
     .sort((a, b) => b[1] - a[1])
     .slice(0, MIN_ROWS);
 
-  const paddedTop = [
-    ...top,
-    ...Array.from({ length: Math.max(0, MIN_ROWS - top.length) }, () => null),
-  ];
-
-  
   const isLoading = !products && (!conversations || conversations.length === 0);
 
   if (!top.length && variant !== "grid") {
@@ -260,7 +227,7 @@ export default function ProductAnalytics({
             <span>Time</span>
           </div>
         )}
-        {paddedTop.map((item, index) => {
+        {top.map((item, index) => {
           const rowStyle = dividerOnly
             ? {
                 backgroundColor: "var(--color-surface-0)",
@@ -271,29 +238,6 @@ export default function ProductAnalytics({
                 backgroundColor: "var(--color-surface-0)",
                 border: `1px solid var(--primary-border)`,
               };
-          if (!item) {
-            return (
-              <div
-                key={`placeholder-fallback-${index}`}
-                className="rounded-none h-[85px] px-4 py-3 flex items-center"
-                style={rowStyle}
-              >
-                <div className="flex items-start justify-between gap-4 w-full">
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-[15px] font-bold mb-2" style={{ color: "var(--secondary-text)" }}>
-                      No product data
-                    </h4>
-                    <div className="text-xs" style={{ color: "var(--tertiary-text)" }}>
-                      -
-                    </div>
-                  </div>
-                  <div className="text-xs font-medium whitespace-nowrap" style={{ color: "var(--color-neutral-700)" }}>
-                    0x
-                  </div>
-                </div>
-              </div>
-            );
-          }
 
           const [url, n] = item;
           const handleViewDetails = () => {
