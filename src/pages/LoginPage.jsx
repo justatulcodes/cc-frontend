@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { login } from "../api";
+import loginBGImg from "../assets/login_bg.jpg";
 
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -49,7 +50,7 @@ export default function LoginPage({ onLogin }) {
         className="hidden lg:flex lg:w-[55%] relative overflow-hidden lg:min-h-screen"
         style={{ 
           backgroundColor: "rgba(10, 2, 49, 0.69)",
-          backgroundImage: "url('/loginmage.svg')",
+          backgroundImage: `url(${loginBGImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat"
@@ -105,14 +106,14 @@ export default function LoginPage({ onLogin }) {
                   lineHeight: '1.1'
                 }}
               >
-                <span>Access Your <span style={{ fontWeight: 700, color: 'var(--color-surface-0)' }}>Analytics.</span></span>
+                <span>Access Your <span style={{ fontWeight: 700, color: 'var(--color-surface-0)' }}>Flooring Performance,</span></span>
                 <span><span style={{ fontWeight: 700, color: 'var(--color-surface-0)' }}>Unlock</span> <span style={{ fontWeight: 700, color: 'var(--color-surface-0)' }}>Smarter</span> <span style={{ fontWeight: 700, color: 'var(--color-surface-0)' }}>Decisions.</span></span>
               </h3>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>Log in to your centralized dashboard to monitor performance, track 
+              <p className="text-base leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>Log in to your Carpet Call dashboard to monitor store performance, track 
                 
               </p>
               <p className="text-base leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>
-                key metrics, and gain real-time insights across your business operations.
+                sales trends and gain real-time visibility across your flooring
               </p>
               <p className="text-base leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>
                 operations.
@@ -126,10 +127,10 @@ export default function LoginPage({ onLogin }) {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-base font-semibold leading-relaxed" style={{ color: 'var(--hex-white)' }}>
-                   Real Time Performance Monitoring
+                   Real-Time Sales & Store Monitoring
                   </h4>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>
-                    Track live data, performance trends, and key metrics in one unified view.
+                    Track live sales and store activity in one unified view.
                   </p>
                 </div>
               </div>             
@@ -139,10 +140,10 @@ export default function LoginPage({ onLogin }) {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-base font-semibold leading-relaxed" style={{ color: 'var(--hex-white)' }}>
-                    Custom Dashboards
+                    Flooring Product & Inventory Insights
                   </h4>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>
-                    Access personalized dashboards tailored to your business goals and KPIs.
+                    Monitor carpet and flooring product performance to manage inventory effectively.
                   </p>
                 </div>
               </div>              
@@ -152,10 +153,10 @@ export default function LoginPage({ onLogin }) {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-base font-semibold leading-relaxed" style={{ color: 'var(--hex-white)' }}>
-                    Actionable Insights & Reporting
+                    Business Performance & Reporting
                   </h4>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-mint-100)' }}>
-                    Transform raw data into clear, actionable insights with visual reports and analytics.
+                    View clear reports to analyze revenue, performance and support business growth.
                   </p>
                 </div>
               </div>
